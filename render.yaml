@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: fastapi-backend
+    env: python
+    region: oregon
+    buildCommand: "poetry install"
+    startCommand: "./start.sh"
+    branch: main
+    plan: free
