@@ -12,17 +12,20 @@ def handle_surface_request(
     x, y, z, u, v = parametrization_fn()
     result = compute_curve_data(x, y, z, u, v, curvature_type=curvature_type, a=a, b=b)
 
-    if isinstance(result, dict):
-        return {
-            "coordinates": {
-                "x": x.tolist(),
-                "y": y.tolist(),
-                "z": z.tolist()
-            },
-            "principal_curvatures": {
-                "k1": result["k1"].tolist(),
-                "k2": result["k2"].tolist()
-            }
+    response = {
+        "coordinates": {
+            "x": x.tolist(),
+            "y": y.tolist(),
+            "z": z.tolist()
         }
+    }
 
-    return build_surface_response(x, y, z, result)
+    if curvature_type == "principal" and isinstance(result[3], dict):
+        response["principal_curvatures"] = {
+            "k1": result[3]["k1"].tolist(),
+            "k2": result[3]["k2"].tolist()
+        }
+    else:
+        response["curvature"] = np.array(result[3]).tolist()
+
+    return response
