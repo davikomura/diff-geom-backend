@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-class CurveInput(BaseModel):
+class SurfaceInput(BaseModel):
     x: str
     y: str
     z: str

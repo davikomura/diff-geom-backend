@@ -1,5 +1,5 @@
-# src/app/data/curve_info.py
-curve_info = {
+# src/app/data/surface_info.py
+surface_info = {
     "sphere": {
         "name": "sphere",
         "type": "surface",
